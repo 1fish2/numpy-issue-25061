@@ -1,0 +1,8 @@
+# pip install -U -r requirements-2.txt
+
+pip
+setuptools
+wheel
+
+numpy==1.25.2
+Cython==0.29.36

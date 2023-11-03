@@ -1,0 +1,8 @@
+# pip install -U -r requirements-3.txt
+
+pip
+setuptools
+wheel
+
+numpy==1.26.1
+Cython==3.0.5
