@@ -1,3 +1,7 @@
+"""
+Run via: python -m unittest
+"""
+
 import unittest
 import testcase as tc
 
@@ -27,11 +31,11 @@ class TestArgTypes(unittest.TestCase):
         assert tc.func_Py_ssize_t(-37) == -37
         assert tc.func_Py_ssize_t(MAX_CLONG) == MAX_CLONG
 
-        with self.assertRaises(TypeError):
-            assert tc.func_Py_ssize_t(13.0)
-
         with self.assertRaises(OverflowError):
             tc.func_Py_ssize_t(MAX_CLONG + 1)
+
+        with self.assertRaises(TypeError):
+            assert tc.func_Py_ssize_t(13.0)
 
     def test_func_npy_intp(self):
         """func_npy_intp() accepts a C long, maybe a float depending on Cython
@@ -40,8 +44,10 @@ class TestArgTypes(unittest.TestCase):
         assert tc.func_npy_intp(-37) == -37
         assert tc.func_npy_intp(MAX_CLONG) == MAX_CLONG
 
-        with self.assertRaises(TypeError):
-            assert tc.func_npy_intp(13.0)
-
         with self.assertRaises(OverflowError):
             tc.func_Py_ssize_t(MAX_CLONG + 1)
+
+        # This test passes with Cython 3.0; fails with Cython 0.29.36.
+        # Same behavior in Cython language_level 3 and 3str.
+        with self.assertRaises(TypeError):
+            assert tc.func_npy_intp(13.0)
