@@ -9,20 +9,19 @@ depending whether this code is compiled with Cython==0.29 + numpy==1.25.2
 vs. Cython==3.0 + numpy==1.26.1, which declare npy_intp differently.
 """
 
-import numpy as np
 cimport numpy as np
 
 
 def func_int(int length):
-    """Accepts an int or a float."""
+    """Accepts a C int or a float."""
     return length
 
 def func_Py_ssize_t(Py_ssize_t length):
-    """Accepts an int; never a float."""
+    """Accepts a C long; never a float."""
     return length
 
 def func_npy_intp(np.npy_intp length):
-    """Accepts an int; float depends on Cython and numpy versions since they
+    """Accepts a C long; float depends on Cython and numpy versions since they
     define npy_intp differently."""
     return length
 
